@@ -1,16 +1,25 @@
-apiVersion: automation.cloudbees.io/v1alpha1
+name: blackduck-hybrid-plugin
 kind: workflow
-name: analyticsDashboard-workflow-qa
+apiVersion: automation.cloudbees.io/v1alpha1
 on:
-  push:
-    branches:
-      - "main"
   workflow_dispatch:
+  # schedule:
+  #   - cron: 30 3 * * 1-5
+permissions:
+  scm-token-own: read
+  scm-token-org: read
+  id-token: write
 jobs:
-  build:
+  blackduck-hybrid-scan:
     steps:
-      - name: Say hello all
-        uses: docker://golang:1.20.3-alpine3.17
-        shell: sh
-        run: |
-          echo "hello world"
+      - name: checkout Source Code
+        uses: cloudbees-io/checkout@v1
+      - name: black duck hybrid plugin scan
+        uses: cloudbees-io/blackduck-sca-scan-dependency@v2
+        with:
+          server-url: https://blackduck.saas-qa.beescloud.com
+          api-token: ${{ secrets.BD_API_TOKEN }}
+          project-name: blackduck-scan-preprod
+          project-version: 0.0.1
+          detect-cli-params: --logging.level.detect=DEBUG --blackduck.offline.mode=false
+          ref: main
