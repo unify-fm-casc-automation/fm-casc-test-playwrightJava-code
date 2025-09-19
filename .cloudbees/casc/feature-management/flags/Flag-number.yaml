@@ -1,0 +1,14 @@
+---
+apiVersion: featuremanagement.cloudbees.io/v1alpha1
+kind: flag
+
+flag: Flag-number
+flagType: number
+description: 
+labels:
+
+availableValues:
+  - 1
+  - 2
+
+isPermanent: false
