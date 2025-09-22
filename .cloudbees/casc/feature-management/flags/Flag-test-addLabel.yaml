@@ -9,7 +9,6 @@ labels:
   - label-1
 
 availableValues:
-  - true
-  - false
+  - label-1
 
 isPermanent: false
