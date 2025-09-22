@@ -1,0 +1,13 @@
+---
+apiVersion: featuremanagement.cloudbees.io/v1alpha1
+kind: target-group
+
+name: Grouptest-1
+
+description: 
+
+conditions:
+  allOf:
+    - property:
+        name: Prop-1
+        operator: is-true
