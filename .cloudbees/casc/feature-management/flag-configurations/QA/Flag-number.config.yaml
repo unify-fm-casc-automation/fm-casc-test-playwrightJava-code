@@ -16,5 +16,4 @@ conditions:
       - property:
           name: Prop-1
           operator: is-false
-    flagValue:
-      valueWrittenInCode: true
+    flagValue: 2
